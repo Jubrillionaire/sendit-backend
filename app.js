@@ -87,5 +87,4 @@ app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);
 });
 
-//for unit testing
 export default app;
