@@ -56,7 +56,7 @@ client
         destination VARCHAR NOT NULL, 
         recipient_name VARCHAR NOT NULL,
         recipient_phone_no VARCHAR NOT NULL,
-        status VARCHAR DEFAULT 'pending'
+        status VARCHAR DEFAULT 'pending...'
        )`,
             (err, res) => {
               if (err) {

@@ -14,7 +14,8 @@ app.post('/users', [
   check('email', 'email must be valid').isEmail(),
   check('phone_no', 'Mobile number must be valid').isMobilePhone(),
   check('password')
-  .isLength({min: 5}).withMessage('Password must have a minimum length of 5')
+  .isLength({min: 5}).withMessage('Password must have a minimum length of 5'),
+  check('email').isEmail().withMessage('email exists, please enter a new one')
 ], createUser);
 
 //endpoint for logging in
