@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.changePresentLocation = exports.changeStatus = exports.changeDestination = exports.cancelParcel = exports.getAllParcels = exports.createParcel = void 0;
+exports.getParcels = exports.changePresentLocation = exports.changeStatus = exports.changeDestination = exports.cancelParcel = exports.getAllParcels = exports.createParcel = void 0;
 
 var _express = _interopRequireDefault(require("express"));
 
@@ -196,7 +196,7 @@ exports.changeStatus = changeStatus;
 
 var changePresentLocation = function changePresentLocation(req, res) {
   var _req$body5 = req.body,
-      presentLocation = _req$body5.presentLocation,
+      location = _req$body5.location,
       parcelId = _req$body5.parcelId;
 
   if (req.decoded.role !== 'admin') {
@@ -204,7 +204,7 @@ var changePresentLocation = function changePresentLocation(req, res) {
       msg: 'failed! Only admins can access this endpoint'
     });
   } else {
-    client.query('UPDATE Parcels SET present_location = $1 WHERE id = $2 RETURNING *', [presentLocation, parcelId], function (err, results) {
+    client.query('UPDATE Parcels SET pickup_location = $1 WHERE id = $2 RETURNING *', [location, parcelId], function (err, results) {
       if (err) {
         res.send(err);
       } else {
@@ -218,3 +218,23 @@ var changePresentLocation = function changePresentLocation(req, res) {
 };
 
 exports.changePresentLocation = changePresentLocation;
+
+var getParcels = function getParcels(req, res) {
+  if (req.decoded.role !== 'admin') {
+    res.send({
+      msg: 'failed! Only admins can access this endpoint'
+    });
+  } else {
+    client.query('SELECT * FROM parcels', function (err, parcels) {
+      if (err) {
+        res.send({
+          msg: "unable to get parcels from db"
+        });
+      } else {
+        res.send(parcels);
+      }
+    });
+  }
+};
+
+exports.getParcels = getParcels;

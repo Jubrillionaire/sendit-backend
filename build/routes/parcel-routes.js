@@ -22,13 +22,14 @@ app.use(_bodyParser["default"].json()); //create a new parcel order.
 
 app.post('/parcels', [(0, _check.check)('recipient_phone_no', 'Please enter a valid mobile Number').isMobilePhone()], _middleware.authorizeUser, _parcelsController.createParcel); //get all parcel orders by a specific user
 
-app.get('/users/:userId/parcels', _middleware.authorizeUser, _parcelsController.getAllParcels); //change destination of an order
+app.get('/users/:userId/parcels', _middleware.authorizeUser, _parcelsController.getAllParcels);
+app.get('/parcels', _middleware.authorizeUser, _parcelsController.getParcels); //change destination of an order
 
 app.patch('/parcels/destination', _middleware.authorizeUser, _parcelsController.changeDestination); //change status of an order
 
 app.patch('/parcels/status', _middleware.authorizeUser, _parcelsController.changeStatus); //change present location of an order
 
-app.patch('/parcels/presentLocation', _middleware.authorizeUser, _parcelsController.changePresentLocation);
+app.patch('/parcels/location', _middleware.authorizeUser, _parcelsController.changePresentLocation);
 app.patch('/parcels/cancel', _middleware.authorizeUser, _parcelsController.cancelParcel);
 var _default = app;
 exports["default"] = _default;

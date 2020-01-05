@@ -57,7 +57,7 @@ app.use("/api/v1", _routes["default"]);
 app.all("*", function (req, res) {
   res.send("endpoint does not exist!");
 });
-var PORT = process.env.PORT || 5000; //running process on the available port
+var PORT = process.env.PORT || 4000; //running process on the available port
 
 app.listen(PORT, function () {
   console.log("running on port ".concat(PORT));
