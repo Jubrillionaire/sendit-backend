@@ -176,11 +176,17 @@ export const changePresentLocation = (req, res) => {
 
 
 export const getParcels = (req, res) => {
+  if(req.decoded.role !== 'admin'){
+    res.send({
+      msg: 'failed! Only admins can access this endpoint'
+    });
+  }else {
   client.query('SELECT * FROM parcels', (err, parcels) => {
    if (err){
-     res.send({msg: "unable to get parcels from database"})
+     res.send({msg: "unable to get parcels from db"})
    } else{
      res.send(parcels)
    }
   })
+}
 }
