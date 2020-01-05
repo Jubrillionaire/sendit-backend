@@ -14,7 +14,7 @@ app.post('/parcels', [ check('recipient_phone_no', 'Please enter a valid mobile 
 //get all parcel orders by a specific user
 app.get('/users/:userId/parcels', authorizeUser, getAllParcels);
 
-app.get('/parcels', getParcels)
+app.get('/parcels', authorizeUser, getParcels)
 
 //change destination of an order
 app.patch('/parcels/destination', authorizeUser, changeDestination);
