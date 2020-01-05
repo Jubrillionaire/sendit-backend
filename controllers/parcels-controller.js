@@ -103,6 +103,8 @@ export const cancelParcel = (req, res) => {
   }
 }
 
+
+
 //request for changing destination for a parcel delivery. accessible only by the user that created that parcel
 export const changeDestination = (req, res) => {
   const { parcelId, destination, user_id } = req.body;
@@ -152,14 +154,14 @@ export const changeStatus = (req, res) => {
 
 //request for changing present location. accessible by admins only
 export const changePresentLocation = (req, res) => {
-  const {presentLocation, parcelId} = req.body;
+  const {location, parcelId} = req.body;
 
   if(req.decoded.role !== 'admin'){
     res.send({
       msg: 'failed! Only admins can access this endpoint'
     });
   }else {
-    client.query('UPDATE Parcels SET present_location = $1 WHERE id = $2 RETURNING *', [presentLocation, parcelId], (err, results) => {
+    client.query('UPDATE Parcels SET pickup_location = $1 WHERE id = $2 RETURNING *', [location, parcelId], (err, results) => {
       if(err){
         res.send(err);
       }else{
@@ -170,4 +172,15 @@ export const changePresentLocation = (req, res) => {
       }
     });
   }
+}
+
+
+export const getParcels = (req, res) => {
+  client.query('SELECT * FROM parcels', (err, parcels) => {
+   if (err){
+     res.send({msg: "unable to get parcels from database"})
+   } else{
+     res.send(parcels)
+   }
+  })
 }

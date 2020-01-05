@@ -25,7 +25,7 @@ app.post('/users', [(0, _check.check)('first_name').isAlpha().withMessage('First
   max: 20
 }).withMessage('First name be of 3 characters and above'), (0, _check.check)('email', 'email must be valid').isEmail(), (0, _check.check)('phone_no', 'Mobile number must be valid').isMobilePhone(), (0, _check.check)('password').isLength({
   min: 5
-}).withMessage('Password must have a minimum length of 5')], _usersController.createUser); //endpoint for logging in
+}).withMessage('Password must have a minimum length of 5'), (0, _check.check)('email').isEmail().withMessage('email exists, please enter a new one')], _usersController.createUser); //endpoint for logging in
 
 app.post('/users/login', _usersController.userLogin); //endpoint for getting user profile details
 

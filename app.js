@@ -56,7 +56,7 @@ client
         destination VARCHAR NOT NULL, 
         recipient_name VARCHAR NOT NULL,
         recipient_phone_no VARCHAR NOT NULL,
-        status VARCHAR DEFAULT 'pending...'
+        status VARCHAR DEFAULT 'pending'
        )`,
             (err, res) => {
               if (err) {
@@ -80,7 +80,7 @@ app.all("*", (req, res) => {
   res.send("endpoint does not exist!");
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 //running process on the available port
 app.listen(PORT, () => {

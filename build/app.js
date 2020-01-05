@@ -61,7 +61,6 @@ var PORT = process.env.PORT || 5000; //running process on the available port
 
 app.listen(PORT, function () {
   console.log("running on port ".concat(PORT));
-}); //for unit testing
-
+});
 var _default = app;
 exports["default"] = _default;
