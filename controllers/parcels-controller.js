@@ -139,7 +139,7 @@ export const changeStatus = (req, res) => {
       msg: 'failed! Only admins can access this endpoint'
     });
   }else {
-    client.query('UPDATE Parcels SET status = $1 WHERE id = $2 RETURNING *', [status, parcelId], (err, results) => {
+    client.query('UPDATE parcels SET status = $1 WHERE id = $2 RETURNING *', [status, parcelId], (err, results) => {
       if(err){
         res.send(err);
       }else{
@@ -161,7 +161,7 @@ export const changePresentLocation = (req, res) => {
       msg: 'failed! Only admins can access this endpoint'
     });
   }else {
-    client.query('UPDATE Parcels SET pickup_location = $1 WHERE id = $2 RETURNING *', [location, parcelId], (err, results) => {
+    client.query('UPDATE parcels SET pickup_location = $1 WHERE id = $2 RETURNING *', [location, parcelId], (err, results) => {
       if(err){
         res.send(err);
       }else{
